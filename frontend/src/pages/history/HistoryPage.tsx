@@ -16,9 +16,8 @@ import { useEarningsStore, type EarningsPeriod } from '../../store/earningsStore
 import { useHistoryStore } from '../../store/historyStore'
 import { useOrderStore } from '../../store/orderStore'
 import type { Order } from '../../types'
+import { formatLongDay, formatTime } from '../../utils/date'
 
-const dayFormat = new Intl.DateTimeFormat('uz-UZ', { day: 'numeric', month: 'long', weekday: 'long' })
-const timeFormat = new Intl.DateTimeFormat('uz-UZ', { hour: '2-digit', minute: '2-digit' })
 
 /** "Bugun" / "Kecha" / "23-noyabr, yakshanba" */
 function dayLabel(iso: string): string {
@@ -27,7 +26,7 @@ function dayLabel(iso: string): string {
   const yesterday = new Date(Date.now() - 86_400_000)
   if (d.toDateString() === today.toDateString()) return 'Bugun'
   if (d.toDateString() === yesterday.toDateString()) return 'Kecha'
-  return dayFormat.format(d)
+  return formatLongDay(d)
 }
 
 function groupByDay(orders: Order[]): [string, Order[]][] {
@@ -102,7 +101,7 @@ function TripRow({ order, asDriver }: { order: Order; asDriver: boolean }) {
         </div>
         <div className="shrink-0 text-right">
           <p className={cancelled ? 'font-semibold text-muted line-through' : 'text-lg font-extrabold tracking-tight'}>{formatSum(total)}</p>
-          <p className="text-xs text-muted">{timeFormat.format(new Date(order.createdAt))}</p>
+          <p className="text-xs text-muted">{formatTime(order.createdAt)}</p>
         </div>
       </div>
 

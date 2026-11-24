@@ -8,9 +8,9 @@ import { formatSum } from '../../../services/pricing'
 import { SCORE_REASON_LABEL, TX_KIND_LABEL } from '../../../services/wallet'
 import { useAdminStore, type DriverRow } from '../../../store/adminStore'
 import type { WalletDetails } from '../../../store/walletStore'
+import { formatShortDateTime } from '../../../utils/date'
 
 const QUICK_TOPUPS = [50_000, 100_000, 200_000]
-const when = new Intl.DateTimeFormat('uz-UZ', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
 const signed = (n: number) => (n > 0 ? `+${n}` : `${n}`)
 
 /** Admin: haydovchi balansini to'ldirish, ballni tuzatish va tarixini ko'rish */
@@ -186,7 +186,7 @@ export default function DriverWalletDialog({ driver, onClose }: { driver: Driver
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-medium">{r.title}</p>
                       <p className="truncate text-xs text-muted">
-                        {when.format(new Date(r.at))}
+                        {formatShortDateTime(r.at)}
                         {r.note && ` · ${r.note}`}
                       </p>
                     </div>

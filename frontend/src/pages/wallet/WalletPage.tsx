@@ -20,8 +20,8 @@ import {
 } from '../../services/wallet'
 import { useOrderStore } from '../../store/orderStore'
 import { useWalletStore } from '../../store/walletStore'
+import { formatShortDateTime } from '../../utils/date'
 
-const when = new Intl.DateTimeFormat('uz-UZ', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
 const signed = (n: number) => (n > 0 ? `+${n}` : `${n}`)
 
 /** Haydovchi: balans, komissiya, ball va ularning tarixi */
@@ -164,7 +164,7 @@ function History({ rows, empty }: { rows: Row[]; empty: string }) {
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-semibold">{r.title}</p>
             <p className="truncate text-xs text-muted">
-              {when.format(new Date(r.at))}
+              {formatShortDateTime(r.at)}
               {r.note && ` · ${r.note}`}
             </p>
           </div>
