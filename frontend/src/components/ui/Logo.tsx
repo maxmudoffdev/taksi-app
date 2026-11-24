@@ -1,0 +1,22 @@
+import { cn } from './cn'
+
+export function LogoMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" className={cn('size-9', className)} aria-hidden>
+      <rect width="64" height="64" rx="16" fill="#18181b" />
+      <path d="M18 38v-6l4-9a4 4 0 0 1 3.7-2.5h12.6A4 4 0 0 1 42 23l4 9v6a2 2 0 0 1-2 2h-2a4 4 0 0 1-8 0h-4a4 4 0 0 1-8 0h-2a2 2 0 0 1-2-2Z" fill="#ffcc00" />
+      <path d="M23 31l2.6-6h12.8l2.6 6Z" fill="#18181b" opacity=".85" />
+    </svg>
+  )
+}
+
+export default function Logo({ className, invert }: { className?: string; invert?: boolean }) {
+  return (
+    <span className={cn('inline-flex items-center gap-2', className)}>
+      <LogoMark />
+      <span className={cn('text-lg font-extrabold tracking-tight', invert ? 'text-white' : 'text-fg')}>
+        taksi<span className="text-brand">.</span>
+      </span>
+    </span>
+  )
+}

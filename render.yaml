@@ -1,0 +1,25 @@
+# Render Blueprint: backend (Node + Socket.io + Telegram bot)
+# Render → New → Blueprint → shu repozitoriy. Maxfiy qiymatlarni Render panelida kiriting.
+services:
+  - type: web
+    name: taksi-backend
+    runtime: node
+    plan: free
+    region: frankfurt
+    rootDir: backend
+    buildCommand: npm install --include=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: TRUST_PROXY # Render proksisi ortida — haqiqiy IP (cheklovlar uchun)
+        value: "1"
+      - key: CLIENT_ORIGIN
+        sync: false # https://<loyiha>.vercel.app
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
